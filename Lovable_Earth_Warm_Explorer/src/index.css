@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 210 11% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
+
+    --primary: 348 83% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 165 35% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 11% 45%;
+
+    --accent: 165 35% 25%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 348 83% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom theme colors */
+    --hero-gradient-start: 165 45% 12%;
+    --hero-gradient-end: 165 35% 20%;
+    --thermal-warm: 25 95% 55%;
+    --thermal-hot: 0 85% 55%;
+    --thermal-cool: 200 75% 50%;
+    --success: 142 70% 45%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 210 11% 25%;
+    --sidebar-primary: 348 83% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 165 35% 95%;
+    --sidebar-accent-foreground: 165 35% 20%;
+    --sidebar-border: 210 20% 92%;
+    --sidebar-ring: 348 83% 40%;
+  }
+
+  .dark {
+    --background: 210 15% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 210 15% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 210 15% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 348 83% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 165 35% 30%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 15% 18%;
+    --muted-foreground: 210 10% 60%;
+
+    --accent: 165 35% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 15% 20%;
+    --input: 210 15% 20%;
+    --ring: 348 83% 50%;
+
+    --sidebar-background: 210 15% 10%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 348 83% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 165 35% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 210 15% 18%;
+    --sidebar-ring: 348 83% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hero-gradient-start)) 0%,
+      hsl(var(--hero-gradient-end)) 100%
+    );
+  }
+
+  .thermal-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--thermal-cool)) 0%,
+      hsl(var(--thermal-warm)) 50%,
+      hsl(var(--thermal-hot)) 100%
+    );
+  }
+
+  .content-card {
+    @apply bg-card rounded-xl shadow-sm border border-border/50 p-6;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-primary font-semibold;
+  }
+
+  .section-badge {
+    @apply inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full;
+  }
+
+  .quiz-option {
+    @apply p-4 rounded-lg border-2 border-border cursor-pointer transition-all duration-200 hover:border-primary/50 hover:bg-muted/50;
+  }
+
+  .quiz-option-selected {
+    @apply border-primary bg-primary/5;
+  }
+
+  .quiz-option-correct {
+    @apply border-green-500 bg-green-50;
+  }
+
+  .quiz-option-incorrect {
+    @apply border-red-500 bg-red-50;
+  }
+
+  .simulation-control {
+    @apply w-full h-2 rounded-full appearance-none cursor-pointer bg-muted;
+  }
+
+  .simulation-control::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 rounded-full bg-primary shadow-md cursor-pointer;
+  }
+
+  .side-nav-item {
+    @apply flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all duration-200 cursor-pointer;
+  }
+
+  .side-nav-item:hover {
+    @apply bg-muted;
+  }
+
+  .side-nav-item-active {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground font-medium;
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
