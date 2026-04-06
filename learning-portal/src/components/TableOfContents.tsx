@@ -23,6 +23,9 @@ interface TableOfContentsProps {
   setCurrentChapter: (chapter: ChapterId) => void;
   activeSection: string;
   visibleSections: Section[];
+  currentView: 'portal' | 'resources';
+  onNavigatePortal: () => void;
+  onNavigateResources: () => void;
 }
 
 export function TableOfContents({
@@ -30,7 +33,10 @@ export function TableOfContents({
   currentChapter,
   setCurrentChapter,
   activeSection,
-  visibleSections
+  visibleSections,
+  currentView,
+  onNavigatePortal,
+  onNavigateResources
 }: TableOfContentsProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -42,7 +48,7 @@ export function TableOfContents({
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [currentChapter]);
+  }, [currentChapter, currentView]);
 
   useEffect(() => {
     const updateMeasurements = () => {
@@ -87,12 +93,25 @@ export function TableOfContents({
     });
   };
 
+  const navButtonClass = (isActive: boolean) =>
+    currentView === 'resources'
+      ? `rounded-full px-5 py-3 text-sm font-semibold transition-all ${
+          isActive
+            ? 'shadow-sm'
+            : 'shadow-sm hover:bg-slate-50'
+        }`
+      : `rounded-full px-5 py-3 text-sm font-semibold transition-all ${
+          isActive
+            ? 'border border-cyan-300/80 bg-gradient-to-r from-cyan-200 to-blue-200 text-slate-950 shadow-md shadow-cyan-200/60'
+            : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm hover:bg-slate-800'
+        }`;
+
   return (
     <div ref={wrapperRef} style={isPinned ? { height: navHeight } : undefined}>
       <section
         id="chapter-nav"
         ref={navRef}
-        className={`w-full border-b border-slate-200 bg-white shadow-md ${
+        className={`w-full border-b border-slate-200 bg-white/95 shadow-md backdrop-blur ${
           isPinned ? 'fixed inset-x-0 top-0 z-50' : 'relative z-40'
         }`}
       >
@@ -100,10 +119,18 @@ export function TableOfContents({
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700">
-                Learning Portal
+                {currentView === 'resources' ? 'Research Library' : 'Learning Portal'}
               </p>
               <h2 className="text-lg font-bold text-slate-950 sm:text-xl">
-                {activeChapter?.title} <span className="text-slate-600">/ {activeChapter?.subtitle}</span>
+                {currentView === 'resources' ? (
+                  <>
+                    Resource Library <span className="text-slate-500">/ Browse all portal materials</span>
+                  </>
+                ) : (
+                  <>
+                    {activeChapter?.title} <span className="text-slate-600">/ {activeChapter?.subtitle}</span>
+                  </>
+                )}
               </h2>
             </div>
 
@@ -117,76 +144,129 @@ export function TableOfContents({
             </button>
 
             <nav className="hidden items-center gap-3 md:flex">
-              {chapters.map((chapter) => {
-                const isActive = chapter.id === currentChapter;
+              {currentView === 'portal' ? (
+                <>
+                  {chapters.map((chapter) => {
+                    const isActive = chapter.id === currentChapter;
 
-                return (
+                    return (
+                      <motion.button
+                        key={chapter.id}
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setCurrentChapter(chapter.id)}
+                        className={navButtonClass(isActive)}
+                      >
+                        {chapter.title}
+                      </motion.button>
+                    );
+                  })}
+
                   <motion.button
-                    key={chapter.id}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setCurrentChapter(chapter.id)}
-                    className={`rounded-full px-5 py-3 text-sm font-semibold transition-all ${
-                      isActive
-                        ? 'border border-cyan-300/80 bg-gradient-to-r from-cyan-200 to-blue-200 text-slate-950 shadow-md shadow-cyan-200/60'
-                        : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm hover:bg-slate-800'
-                    }`}
+                    onClick={onNavigateResources}
+                    className={navButtonClass(false)}
                   >
-                    {chapter.title}
+                    Resources
                   </motion.button>
-                );
-              })}
+                </>
+              ) : (
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={onNavigatePortal}
+                  className={navButtonClass(true)}
+                  style={{
+                    backgroundColor: '#0b5f22',
+                    color: '#ffffff',
+                    border: '1px solid #0b5f22',
+                    boxShadow: '0 8px 20px -14px rgba(11, 95, 34, 0.65)',
+                  }}
+                >
+                  Back To Portal
+                </motion.button>
+              )}
             </nav>
           </div>
 
           {isMobileMenuOpen ? (
             <div className="mt-4 space-y-3 md:hidden">
               <div className="grid grid-cols-1 gap-2">
-                {chapters.map((chapter) => {
-                  const isActive = chapter.id === currentChapter;
+                {currentView === 'portal'
+                  ? chapters.map((chapter) => {
+                      const isActive = chapter.id === currentChapter;
 
-                  return (
-                    <button
-                      key={chapter.id}
-                      type="button"
-                      onClick={() => setCurrentChapter(chapter.id)}
-                      className={`rounded-2xl px-4 py-3 text-left transition ${
-                        isActive
-                          ? 'border border-cyan-300/80 bg-gradient-to-r from-cyan-200 to-blue-200 text-slate-950 shadow-md shadow-cyan-200/60'
-                          : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm'
-                      }`}
-                    >
-                      <div className="font-semibold">{chapter.title}</div>
-                      <div className={`text-sm ${isActive ? 'text-slate-900/80' : 'text-slate-300'}`}>
-                        {chapter.subtitle}
-                      </div>
-                    </button>
-                  );
-                })}
+                      return (
+                        <button
+                          key={chapter.id}
+                          type="button"
+                          onClick={() => setCurrentChapter(chapter.id)}
+                          className={`rounded-2xl px-4 py-3 text-left transition ${
+                            isActive
+                              ? 'border border-cyan-300/80 bg-gradient-to-r from-cyan-200 to-blue-200 text-slate-950 shadow-md shadow-cyan-200/60'
+                              : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm'
+                          }`}
+                        >
+                          <div className="font-semibold">{chapter.title}</div>
+                          <div className={`text-sm ${isActive ? 'text-slate-900/80' : 'text-slate-300'}`}>
+                            {chapter.subtitle}
+                          </div>
+                        </button>
+                      );
+                    })
+                  : null}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (currentView === 'resources') {
+                      onNavigatePortal();
+                    } else {
+                      onNavigateResources();
+                    }
+                  }}
+                  className={`rounded-2xl px-4 py-3 text-left transition ${
+                    currentView === 'resources'
+                      ? 'border border-emerald-900 bg-emerald-900 text-white shadow-sm'
+                      : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm'
+                  }`}
+                >
+                  <div className="font-semibold">{currentView === 'resources' ? 'Back To Portal' : 'Resources'}</div>
+                  <div className={`text-sm ${currentView === 'resources' ? 'text-white/80' : 'text-slate-300'}`}>
+                    {currentView === 'resources' ? 'Return to chapter view' : 'Browse all resource cards'}
+                  </div>
+                </button>
               </div>
             </div>
           ) : null}
 
-          <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-700/60 pt-4">
-            {visibleSections.map((section) => {
-              const isActive = activeSection === section.id;
+          {currentView === 'portal' ? (
+            <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-200 pt-4">
+              {visibleSections.map((section) => {
+                const isActive = activeSection === section.id;
 
-              return (
-                <button
-                  key={section.id}
-                  type="button"
-                  onClick={() => scrollToSection(section.id)}
-                  className={`rounded-full border px-3.5 py-2 text-sm font-medium shadow-sm transition ${
-                    isActive
-                      ? 'border-cyan-300/70 bg-cyan-100 text-slate-950 shadow-cyan-950/20'
-                      : 'border-slate-600/70 bg-slate-800/85 text-slate-100 hover:border-slate-500 hover:bg-slate-700/90'
-                  }`}
-                >
-                  <span className="font-semibold">{section.number}</span> {section.label}
-                </button>
-              );
-            })}
-          </div>
+                return (
+                  <button
+                    key={section.id}
+                    type="button"
+                    onClick={() => scrollToSection(section.id)}
+                    className={`rounded-full border px-3.5 py-2 text-sm font-medium shadow-sm transition ${
+                      isActive
+                        ? 'border-cyan-300/70 bg-cyan-100 text-slate-950 shadow-cyan-950/20'
+                        : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    <span className="font-semibold">{section.number}</span> {section.label}
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="mt-4 border-t border-slate-200 pt-4 text-sm text-slate-600">
+              Browse the full research library by chapter or keyword.
+            </div>
+          )}
         </div>
       </section>
     </div>

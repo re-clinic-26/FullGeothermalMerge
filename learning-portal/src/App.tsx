@@ -16,10 +16,12 @@ import { CommunityEngagement } from './components/CommunityEngagement';
 import { HomeownerFAQs } from './components/HomeownerFAQs';
 import { InteractiveMap } from './components/InteractiveMap';
 import { QuizSection } from './components/QuizSection';
+import { ResourcesPage } from './components/ResourcesPage';
 import { TableOfContents } from './components/TableOfContents';
 import { chapter3Quiz } from './data/quizzes';
 
 type ChapterId = 'chapter-1' | 'chapter-2' | 'chapter-3';
+type AppView = 'portal' | 'resources';
 
 interface Section {
   id: string;
@@ -119,6 +121,9 @@ function ChapterContent({ currentChapter }: { currentChapter: ChapterId }) {
 }
 
 export default function App() {
+  const [currentView, setCurrentView] = useState<AppView>(() =>
+    window.location.pathname.replace(/\/+$/, '').endsWith('/resources') ? 'resources' : 'portal'
+  );
   const [currentChapter, setCurrentChapter] = useState<ChapterId>('chapter-1');
   const visibleSections = useMemo(
     () => chapters.find((chapter) => chapter.id === currentChapter)?.sections ?? [],
@@ -131,6 +136,19 @@ export default function App() {
   }, [visibleSections]);
 
   useEffect(() => {
+    const handlePopState = () => {
+      setCurrentView(window.location.pathname.replace(/\/+$/, '').endsWith('/resources') ? 'resources' : 'portal');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (currentView !== 'portal') {
+      return;
+    }
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 220;
 
@@ -152,9 +170,13 @@ export default function App() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [visibleSections]);
+  }, [currentView, visibleSections]);
 
   useEffect(() => {
+    if (currentView !== 'portal') {
+      return;
+    }
+
     const chapterNav = document.getElementById('chapter-nav');
     if (!chapterNav) {
       return;
@@ -162,21 +184,54 @@ export default function App() {
 
     const top = chapterNav.getBoundingClientRect().top + window.pageYOffset - 24;
     window.scrollTo({ top, behavior: 'smooth' });
-  }, [currentChapter]);
+  }, [currentChapter, currentView]);
+
+  const buildPath = (view: AppView) => {
+    const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+    return view === 'resources' ? `${base}/resources` || '/resources' : `${base}/` || '/';
+  };
+
+  const navigateToView = (view: AppView) => {
+    const nextPath = buildPath(view);
+    window.history.pushState({}, '', nextPath);
+    setCurrentView(view);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
-      <Hero />
-      <TableOfContents
-        chapters={chapters}
-        currentChapter={currentChapter}
-        setCurrentChapter={setCurrentChapter}
-        activeSection={activeSection}
-        visibleSections={visibleSections}
-      />
-      <div className="relative">
-        <ChapterContent currentChapter={currentChapter} />
-      </div>
+      {currentView === 'portal' ? (
+        <>
+          <Hero />
+          <TableOfContents
+            chapters={chapters}
+            currentChapter={currentChapter}
+            setCurrentChapter={setCurrentChapter}
+            activeSection={activeSection}
+            visibleSections={visibleSections}
+            currentView={currentView}
+            onNavigatePortal={() => navigateToView('portal')}
+            onNavigateResources={() => navigateToView('resources')}
+          />
+          <div className="relative">
+            <ChapterContent currentChapter={currentChapter} />
+          </div>
+        </>
+      ) : (
+        <>
+          <TableOfContents
+            chapters={chapters}
+            currentChapter={currentChapter}
+            setCurrentChapter={setCurrentChapter}
+            activeSection={activeSection}
+            visibleSections={visibleSections}
+            currentView={currentView}
+            onNavigatePortal={() => navigateToView('portal')}
+            onNavigateResources={() => navigateToView('resources')}
+          />
+          <ResourcesPage />
+        </>
+      )}
     </div>
   );
 }

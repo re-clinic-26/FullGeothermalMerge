@@ -1,8 +1,9 @@
 import { motion } from 'motion/react';
-import { ExternalLink, FileText, Newspaper, PlayCircle, Radio, Presentation } from 'lucide-react';
+import { ArrowRight, ExternalLink, FileText, Newspaper, PlayCircle, Radio, Presentation } from 'lucide-react';
 import { resourceCards, type ResourceCard } from '../data/resources';
 
 type Tone = 'light' | 'dark';
+type ResourceCardVariant = 'default' | 'library';
 
 interface RelatedResourcesProps {
   sections: string[];
@@ -11,7 +12,7 @@ interface RelatedResourcesProps {
   description?: string;
 }
 
-const typeLabel: Record<ResourceCard['type'], string> = {
+export const typeLabel: Record<ResourceCard['type'], string> = {
   leaflet: 'Leaflet',
   'fact-sheet': 'Fact Sheet',
   video: 'Video',
@@ -30,7 +31,7 @@ const typeLabel: Record<ResourceCard['type'], string> = {
   faqs: 'FAQs',
 };
 
-function getTypeIcon(type: ResourceCard['type']) {
+export function getTypeIcon(type: ResourceCard['type']) {
   if (type === 'video') return PlayCircle;
   if (type === 'radio') return Radio;
   if (type === 'article') return Newspaper;
@@ -38,9 +39,119 @@ function getTypeIcon(type: ResourceCard['type']) {
   return FileText;
 }
 
-function ResourceCardTile({ resource, tone }: { resource: ResourceCard; tone: Tone }) {
+function getResourceActionLabel(type: ResourceCard['type']) {
+  if (type === 'video') return 'Watch Video';
+  if (type === 'radio') return 'Listen Now';
+  if (type === 'presentation') return 'View Slides';
+  if (type === 'flyer' || type === 'fact-sheet') return 'View Fact Sheet';
+  if (type === 'leaflet') return 'Read Leaflet';
+  if (type === 'article') return 'Read Article';
+  if (type === 'report' || type === 'study') return 'Read Report';
+  if (type === 'timeline') return 'View Timeline';
+  if (type === 'chart') return 'Open Chart';
+  if (type === 'guide' || type === 'sample' || type === 'draft' || type === 'faqs') return 'Open Guide';
+  return 'Open Resource';
+}
+
+export function ResourceCardTile({
+  resource,
+  tone,
+  variant = 'default',
+}: {
+  resource: ResourceCard;
+  tone: Tone;
+  variant?: ResourceCardVariant;
+}) {
   const Icon = getTypeIcon(resource.type);
   const isDark = tone === 'dark';
+  const isLibrary = variant === 'library';
+  const actionLabel = getResourceActionLabel(resource.type);
+
+  if (isLibrary) {
+    return (
+      <motion.a
+        href={resource.url}
+        target="_blank"
+        rel="noreferrer"
+        whileHover={{ y: -6 }}
+        className="group min-w-0 transition-all duration-300"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          overflow: 'hidden',
+          borderRadius: '28px',
+          background: '#ffffff',
+          border: '1px solid rgba(226, 232, 240, 0.9)',
+          boxShadow: '0 24px 60px -38px rgba(15, 23, 42, 0.28)',
+        }}
+      >
+        <div
+          className="relative bg-slate-100"
+          style={{
+            height: '230px',
+            overflow: 'hidden',
+            borderTopLeftRadius: '28px',
+            borderTopRightRadius: '28px',
+            flexShrink: 0,
+          }}
+        >
+          {resource.thumbnail ? (
+            <img
+              src={resource.thumbnail}
+              alt={resource.title}
+              className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 via-stone-50 to-emerald-50">
+              <div className="rounded-full bg-white p-4 text-slate-700 shadow-md">
+                <Icon className="h-8 w-8" />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div
+          className="pb-6 pt-5"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            minHeight: '290px',
+            background: '#ffffff',
+            paddingLeft: '2rem',
+            paddingRight: '2rem',
+            paddingBottom: '2rem',
+          }}
+        >
+          <h3
+            className="font-bold leading-[1.06] tracking-[-0.03em] text-slate-900"
+            style={{ fontSize: '1.1rem', maxWidth: '16ch' }}
+          >
+            {resource.title}
+          </h3>
+
+          <div className="mt-4">
+            <span
+              className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-white"
+              style={{ borderRadius: '999px', background: '#0b5f22', padding: '0.45rem 0.85rem' }}
+            >
+              Section {resource.section}
+            </span>
+          </div>
+
+          <p className="mt-4 text-base leading-8 text-slate-600" style={{ flex: 1, maxWidth: '26ch' }}>
+            {resource.description}
+          </p>
+
+          <div className="mt-8 inline-flex items-center gap-1.5 text-base font-semibold text-red-700">
+            <span>{actionLabel}</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </div>
+        </div>
+      </motion.a>
+    );
+  }
 
   return (
     <motion.a
