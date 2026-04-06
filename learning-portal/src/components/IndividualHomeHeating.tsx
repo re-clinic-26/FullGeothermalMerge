@@ -1,11 +1,13 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Home, Wind, Droplets, Waves, ArrowDownUp, ThermometerSun } from 'lucide-react';
+import { HeatPumpDiagram } from './illustrations/HeatPumpDiagram';
 import { RelatedResources } from './RelatedResources';
 
 export function IndividualHomeHeating() {
   const [hoveredPump, setHoveredPump] = useState<string | null>(null);
   const [showHVAC, setShowHVAC] = useState(false);
+  const [heatPumpMode, setHeatPumpMode] = useState<'heating' | 'cooling'>('heating');
 
   const heatPumps = [
     {
@@ -132,6 +134,51 @@ export function IndividualHomeHeating() {
             >
               {showHVAC ? 'Hide Details' : 'Learn About Heat Pumps'}
             </button>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <div className="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-blue-50 p-8 shadow-xl">
+            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h3 className="text-2xl font-bold text-slate-800">Ground-source heat pump in motion</h3>
+                <p className="mt-2 max-w-2xl text-slate-600">
+                  This diagram matches the portal’s home-heating section and shows how a building exchanges energy with stable underground temperatures in different seasons.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setHeatPumpMode('heating')}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                    heatPumpMode === 'heating'
+                      ? 'bg-orange-500 text-white shadow-md'
+                      : 'bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-orange-50'
+                  }`}
+                >
+                  Winter heating
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setHeatPumpMode('cooling')}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                    heatPumpMode === 'cooling'
+                      ? 'bg-cyan-500 text-white shadow-md'
+                      : 'bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-cyan-50'
+                  }`}
+                >
+                  Summer cooling
+                </button>
+              </div>
+            </div>
+
+            <HeatPumpDiagram mode={heatPumpMode} />
           </div>
         </motion.div>
 

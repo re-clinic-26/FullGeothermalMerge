@@ -1,6 +1,9 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { DollarSign, Building2, Users, Landmark, TrendingDown, FileText } from 'lucide-react';
+import { chapter1Quiz } from '../data/quizzes';
+import { QuizSection } from './QuizSection';
+import { FundingMixChart } from './illustrations/FundingMixChart';
 import { RelatedResources } from './RelatedResources';
 
 export function Costs() {
@@ -144,6 +147,16 @@ export function Costs() {
               );
             })}
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <FundingMixChart />
         </motion.div>
 
         {/* Ownership Models */}
@@ -316,6 +329,14 @@ export function Costs() {
           title="Resources For Section 1.6"
           description="Use these source documents to dig into financing structures, investment models, and funding opportunities."
         />
+
+        <div className="mt-16">
+          <QuizSection
+            quizId="chapter-1-quiz"
+            title="Chapter 1 Quiz: Geothermal Basics"
+            questions={chapter1Quiz}
+          />
+        </div>
       </div>
     </section>
   );

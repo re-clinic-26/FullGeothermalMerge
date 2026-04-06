@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Users, Building2, Heart, Briefcase, Home, Factory, School, Hospital } from 'lucide-react';
+import { CoalitionNetworkDiagram } from './illustrations/CoalitionNetworkDiagram';
 import { RelatedResources } from './RelatedResources';
 
 export function BuildCoalition() {
@@ -150,6 +151,16 @@ export function BuildCoalition() {
               and public health benefits, impacts on access and affordability, and job opportunities.
             </p>
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <CoalitionNetworkDiagram />
         </motion.div>
 
         {/* Stakeholder Grid */}

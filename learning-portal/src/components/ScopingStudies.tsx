@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { FileText, MapPin, DollarSign, TrendingUp, Layers, Zap } from 'lucide-react';
+import { ScopingStudyProcessDiagram } from './illustrations/ScopingStudyProcessDiagram';
 import { RelatedResources } from './RelatedResources';
 
 export function ScopingStudies() {
@@ -156,6 +157,16 @@ export function ScopingStudies() {
               );
             })}
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <ScopingStudyProcessDiagram />
         </motion.div>
 
         {/* Questions Section */}

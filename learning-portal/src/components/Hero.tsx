@@ -2,15 +2,8 @@ import { motion } from 'motion/react';
 import { Flame, ArrowDown } from 'lucide-react';
 
 export function Hero() {
-  const scrollToContent = () => {
-    const introSection = document.getElementById('introduction');
-    if (introSection) {
-      introSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[72vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -30,7 +23,7 @@ export function Hero() {
           className="flex items-center justify-center gap-3 mb-6"
         >
           <Flame className="w-12 h-12 text-orange-400" />
-          <h1 className="text-6xl md:text-7xl font-bold text-white">
+          <h1 className="text-5xl md:text-7xl font-bold text-white">
             Geothermal Basics
           </h1>
         </motion.div>
@@ -39,7 +32,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-2xl md:text-3xl text-blue-100 mb-8"
+          className="text-xl md:text-3xl text-blue-100 mb-6"
         >
           Understanding Heating and Cooling Energy
         </motion.p>
@@ -48,22 +41,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg md:text-xl text-slate-200 max-w-3xl mx-auto mb-12"
+          className="text-base md:text-xl text-slate-200 max-w-3xl mx-auto mb-10"
         >
           Learn how geothermal systems work, and discover the benefits and costs 
           for your household, your community, and the planet.
         </motion.p>
-
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          onClick={scrollToContent}
-          className="group bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-105"
-        >
-          Start Learning
-          <ArrowDown className="inline-block ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform" />
-        </motion.button>
       </div>
 
       {/* Decorative Elements */}

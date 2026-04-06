@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Hero } from './components/Hero';
 import { Introduction } from './components/Introduction';
 import { IndividualHomeHeating } from './components/IndividualHomeHeating';
@@ -15,69 +15,167 @@ import { BuildingRetrofits } from './components/BuildingRetrofits';
 import { CommunityEngagement } from './components/CommunityEngagement';
 import { HomeownerFAQs } from './components/HomeownerFAQs';
 import { InteractiveMap } from './components/InteractiveMap';
+import { QuizSection } from './components/QuizSection';
 import { TableOfContents } from './components/TableOfContents';
+import { chapter3Quiz } from './data/quizzes';
 
-export default function App() {
-  const [activeSection, setActiveSection] = useState('introduction');
+type ChapterId = 'chapter-1' | 'chapter-2' | 'chapter-3';
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        'introduction',
-        'individual-heating',
-        'district-heating',
-        'electricity-generation',
-        'benefits',
-        'costs',
-        'build-coalition',
-        'community-opportunities',
-        'design-process',
-        'site-selection',
-        'scoping-studies',
-        'building-retrofits',
-        'community-engagement',
-        'homeowner-faqs',
-        'global-map'
-      ];
+interface Section {
+  id: string;
+  label: string;
+  number: string;
+}
 
-      const scrollPosition = window.scrollY + 200;
+interface Chapter {
+  id: ChapterId;
+  title: string;
+  subtitle: string;
+  sections: Section[];
+}
 
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
+const chapters: Chapter[] = [
+  {
+    id: 'chapter-1',
+    title: 'Chapter 1',
+    subtitle: 'Geothermal Basics',
+    sections: [
+      { id: 'introduction', label: 'Introduction', number: '1.1' },
+      { id: 'individual-heating', label: 'Individual Home Heating', number: '1.2' },
+      { id: 'district-heating', label: 'District Heating', number: '1.3' },
+      { id: 'electricity-generation', label: 'Electricity Generation', number: '1.4' },
+      { id: 'benefits', label: 'Benefits', number: '1.5' },
+      { id: 'costs', label: 'Costs', number: '1.6' }
+    ]
+  },
+  {
+    id: 'chapter-2',
+    title: 'Chapter 2',
+    subtitle: 'Community Organizing',
+    sections: [
+      { id: 'build-coalition', label: 'Build a Coalition', number: '2.1' },
+      { id: 'community-opportunities', label: 'Community Opportunities', number: '2.2' },
+      { id: 'design-process', label: 'Coalition Process', number: '2.3' }
+    ]
+  },
+  {
+    id: 'chapter-3',
+    title: 'Chapter 3',
+    subtitle: 'Project Development',
+    sections: [
+      { id: 'site-selection', label: 'Site Selection', number: '3.1' },
+      { id: 'scoping-studies', label: 'Scoping Studies', number: '3.2' },
+      { id: 'building-retrofits', label: 'Building Retrofits', number: '3.3' },
+      { id: 'community-engagement', label: 'Community Engagement', number: '3.4' },
+      { id: 'homeowner-faqs', label: 'Homeowner FAQs', number: '3.5' },
+      { id: 'global-map', label: 'Global Examples', number: '3.6' }
+    ]
+  }
+];
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
-      <Hero />
-      <TableOfContents activeSection={activeSection} />
-      <div className="relative">
+function ChapterContent({ currentChapter }: { currentChapter: ChapterId }) {
+  if (currentChapter === 'chapter-1') {
+    return (
+      <>
         <Introduction />
         <IndividualHomeHeating />
         <DistrictHeating />
         <ElectricityGeneration />
         <Benefits />
         <Costs />
+      </>
+    );
+  }
+
+  if (currentChapter === 'chapter-2') {
+    return (
+      <>
         <BuildCoalition />
         <CommunityOpportunities />
         <DesignProcess />
-        <SiteSelection />
-        <ScopingStudies />
-        <BuildingRetrofits />
-        <CommunityEngagement />
-        <HomeownerFAQs />
-        <InteractiveMap />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <SiteSelection />
+      <ScopingStudies />
+      <BuildingRetrofits />
+      <CommunityEngagement />
+      <HomeownerFAQs />
+      <div className="bg-gradient-to-br from-slate-50 to-blue-50 px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <QuizSection
+            quizId="chapter-3-quiz"
+            title="Chapter 3 Quiz: Project Development"
+            questions={chapter3Quiz}
+          />
+        </div>
+      </div>
+      <InteractiveMap />
+    </>
+  );
+}
+
+export default function App() {
+  const [currentChapter, setCurrentChapter] = useState<ChapterId>('chapter-1');
+  const visibleSections = useMemo(
+    () => chapters.find((chapter) => chapter.id === currentChapter)?.sections ?? [],
+    [currentChapter]
+  );
+  const [activeSection, setActiveSection] = useState(visibleSections[0]?.id ?? 'introduction');
+
+  useEffect(() => {
+    setActiveSection(visibleSections[0]?.id ?? 'introduction');
+  }, [visibleSections]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 220;
+
+      for (const section of visibleSections) {
+        const element = document.getElementById(section.id);
+        if (!element) {
+          continue;
+        }
+
+        const { offsetTop, offsetHeight } = element;
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          setActiveSection(section.id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [visibleSections]);
+
+  useEffect(() => {
+    const chapterNav = document.getElementById('chapter-nav');
+    if (!chapterNav) {
+      return;
+    }
+
+    const top = chapterNav.getBoundingClientRect().top + window.pageYOffset - 24;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, [currentChapter]);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
+      <Hero />
+      <TableOfContents
+        chapters={chapters}
+        currentChapter={currentChapter}
+        setCurrentChapter={setCurrentChapter}
+        activeSection={activeSection}
+        visibleSections={visibleSections}
+      />
+      <div className="relative">
+        <ChapterContent currentChapter={currentChapter} />
       </div>
     </div>
   );

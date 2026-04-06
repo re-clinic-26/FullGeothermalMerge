@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Building2, Flame, Snowflake, Zap, Network, Users } from 'lucide-react';
+import { ThermalNetworkDiagram } from './illustrations/ThermalNetworkDiagram';
 import { RelatedResources } from './RelatedResources';
 
 export function DistrictHeating() {
@@ -98,6 +99,16 @@ export function DistrictHeating() {
               be either centralized (with one main facility) or de-centralized (with distributed sources).
             </p>
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <ThermalNetworkDiagram />
         </motion.div>
 
         {/* Systems Comparison Grid */}

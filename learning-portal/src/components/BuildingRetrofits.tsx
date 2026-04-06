@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Home, Wrench, Thermometer, Droplet, Wind, CheckCircle, Building2, Factory, School } from 'lucide-react';
+import { BuildingConnectionDiagram } from './illustrations/BuildingConnectionDiagram';
 import { RelatedResources } from './RelatedResources';
 
 export function BuildingRetrofits() {
@@ -175,6 +176,16 @@ export function BuildingRetrofits() {
               );
             })}
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <BuildingConnectionDiagram />
         </motion.div>
 
         {/* Building Type Retrofits */}

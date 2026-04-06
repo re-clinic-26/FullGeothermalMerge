@@ -351,6 +351,7 @@ export function InteractiveMap() {
           </p>
           <p className="text-xs">Data current as of January 2026 • Sources: IEA, GEA, Local Energy Authorities</p>
         </motion.div>
+
       </div>
     </section>
   );

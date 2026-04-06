@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Users, Target, MessageCircle, FileText, DollarSign, TrendingUp } from 'lucide-react';
+import { chapter2Quiz } from '../data/quizzes';
+import { QuizSection } from './QuizSection';
 import { RelatedResources } from './RelatedResources';
 
 export function DesignProcess() {
@@ -210,6 +212,14 @@ export function DesignProcess() {
           title="Resources For Sections 2.3-2.6"
           description="These cards support coalition process design, decision timelines, ownership models, and financing pathways while staying grouped within one cohesive portal section."
         />
+
+        <div className="mt-16">
+          <QuizSection
+            quizId="chapter-2-quiz"
+            title="Chapter 2 Quiz: Community Organizing"
+            questions={chapter2Quiz}
+          />
+        </div>
       </div>
     </section>
   );

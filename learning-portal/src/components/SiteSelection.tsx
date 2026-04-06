@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { MapPin, CheckCircle, Building2, Home, Factory, School, Users } from 'lucide-react';
+import { SiteSelectionDiagram } from './illustrations/SiteSelectionDiagram';
 import { RelatedResources } from './RelatedResources';
 
 export function SiteSelection() {
@@ -111,6 +112,16 @@ export function SiteSelection() {
               coalition and become organizers!</strong>
             </p>
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <SiteSelectionDiagram />
         </motion.div>
 
         {/* Key Features Grid */}
