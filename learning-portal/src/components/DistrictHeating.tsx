@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Building2, Flame, Snowflake, Zap, Network, Users } from 'lucide-react';
 import { ThermalNetworkDiagram } from './illustrations/ThermalNetworkDiagram';
-import { RelatedResources } from './RelatedResources';
 
 export function DistrictHeating() {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
@@ -245,11 +244,6 @@ export function DistrictHeating() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['1.3']}
-          title="Resources For Section 1.3"
-          description="This section has the deepest supporting library, so the cards below surface explainers, flyers, videos, and articles without breaking the portal’s visual rhythm."
-        />
       </div>
     </section>
   );

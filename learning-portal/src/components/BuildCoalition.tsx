@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Users, Building2, Heart, Briefcase, Home, Factory, School, Hospital } from 'lucide-react';
 import { CoalitionNetworkDiagram } from './illustrations/CoalitionNetworkDiagram';
-import { RelatedResources } from './RelatedResources';
 
 export function BuildCoalition() {
   const [hoveredStakeholder, setHoveredStakeholder] = useState<string | null>(null);
@@ -264,11 +263,6 @@ export function BuildCoalition() {
           </p>
         </motion.div>
 
-        <RelatedResources
-          sections={['2.1']}
-          title="Resources For Section 2.1"
-          description="These materials support coalition building by grounding outreach in concrete community benefits."
-        />
       </div>
     </section>
   );

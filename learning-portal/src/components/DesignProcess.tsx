@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Users, Target, MessageCircle, FileText, DollarSign, TrendingUp } from 'lucide-react';
 import { chapter2Quiz } from '../data/quizzes';
 import { QuizSection } from './QuizSection';
-import { RelatedResources } from './RelatedResources';
 
 export function DesignProcess() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
@@ -206,12 +205,6 @@ export function DesignProcess() {
             </div>
           </div>
         </motion.div>
-
-        <RelatedResources
-          sections={['2.3', '2.4', '2.5', '2.6']}
-          title="Resources For Sections 2.3-2.6"
-          description="These cards support coalition process design, decision timelines, ownership models, and financing pathways while staying grouped within one cohesive portal section."
-        />
 
         <div className="mt-16">
           <QuizSection

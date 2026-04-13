@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { School, Home, Building2, MapPin, CheckCircle } from 'lucide-react';
-import { RelatedResources } from './RelatedResources';
 
 export function CommunityOpportunities() {
   const [selectedOpportunity, setSelectedOpportunity] = useState<number | null>(null);
@@ -184,11 +183,6 @@ export function CommunityOpportunities() {
           </p>
         </motion.div>
 
-        <RelatedResources
-          sections={['2.2']}
-          title="Resources For Section 2.2"
-          description="Use these supporting tools to identify target buildings, infrastructure opportunities, and promising starting points in your community."
-        />
       </div>
     </section>
   );

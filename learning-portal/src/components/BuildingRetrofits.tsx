@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Home, Wrench, Thermometer, Droplet, Wind, CheckCircle, Building2, Factory, School } from 'lucide-react';
 import { BuildingConnectionDiagram } from './illustrations/BuildingConnectionDiagram';
-import { RelatedResources } from './RelatedResources';
 
 export function BuildingRetrofits() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
@@ -292,11 +291,6 @@ export function BuildingRetrofits() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['3.3']}
-          title="Resources For Section 3.3"
-          description="These resources focus on building compatibility, retrofit requirements, and how candidate buildings should be assessed."
-        />
       </div>
     </section>
   );

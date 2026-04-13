@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Users, Mail, Globe, Calendar, Target, Home, Building2 } from 'lucide-react';
-import { RelatedResources } from './RelatedResources';
 
 export function CommunityEngagement() {
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
@@ -279,11 +278,6 @@ export function CommunityEngagement() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['3.4']}
-          title="Resources For Section 3.4"
-          description="These supporting materials help translate the portal’s engagement advice into usable planning and stakeholder analysis documents."
-        />
       </div>
     </section>
   );

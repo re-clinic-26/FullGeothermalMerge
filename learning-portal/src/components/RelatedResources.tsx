@@ -82,14 +82,14 @@ export function ResourceCardTile({
           overflow: 'hidden',
           borderRadius: '28px',
           background: '#ffffff',
-          border: '1px solid rgba(226, 232, 240, 0.9)',
-          boxShadow: '0 24px 60px -38px rgba(15, 23, 42, 0.28)',
+          border: '1px solid rgba(226, 232, 240, 0.95)',
+          boxShadow: '0 28px 70px -42px rgba(15, 23, 42, 0.35)',
         }}
       >
         <div
           className="relative bg-slate-100"
           style={{
-            height: '230px',
+            height: '215px',
             overflow: 'hidden',
             borderTopLeftRadius: '28px',
             borderTopRightRadius: '28px',
@@ -117,21 +117,23 @@ export function ResourceCardTile({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            minHeight: '290px',
+            gap: '1.05rem',
+            minHeight: '265px',
             background: '#ffffff',
-            paddingLeft: '2rem',
-            paddingRight: '2rem',
-            paddingBottom: '2rem',
+            paddingLeft: '2.35rem',
+            paddingRight: '2.35rem',
+            paddingTop: '2rem',
+            paddingBottom: '2.25rem',
           }}
         >
           <h3
-            className="font-bold leading-[1.06] tracking-[-0.03em] text-slate-900"
-            style={{ fontSize: '1.1rem', maxWidth: '16ch' }}
+            className="font-bold leading-tight tracking-[-0.03em] text-slate-900"
+            style={{ fontSize: '1.35rem', maxWidth: '100%' }}
           >
             {resource.title}
           </h3>
 
-          <div className="mt-4">
+          <div>
             <span
               className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-white"
               style={{ borderRadius: '999px', background: '#0b5f22', padding: '0.45rem 0.85rem' }}
@@ -140,11 +142,11 @@ export function ResourceCardTile({
             </span>
           </div>
 
-          <p className="mt-4 text-base leading-8 text-slate-600" style={{ flex: 1, maxWidth: '26ch' }}>
+          <p className="text-base leading-7 text-slate-600" style={{ maxWidth: '100%' }}>
             {resource.description}
           </p>
 
-          <div className="mt-8 inline-flex items-center gap-1.5 text-base font-semibold text-red-700">
+          <div className="inline-flex items-center gap-1.5 text-base font-semibold text-red-700" style={{ marginTop: 'auto' }}>
             <span>{actionLabel}</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>

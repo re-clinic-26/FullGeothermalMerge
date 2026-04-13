@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { HelpCircle, ChevronDown, DollarSign, Clock, Wrench, Home, TrendingUp, Shield } from 'lucide-react';
-import { RelatedResources } from './RelatedResources';
 
 export function HomeownerFAQs() {
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
@@ -244,11 +243,6 @@ export function HomeownerFAQs() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['3.5']}
-          title="Resources For Section 3.5"
-          description="These outreach-ready materials complement the FAQ content with a dedicated FAQ resource and public-facing messaging collateral."
-        />
       </div>
     </section>
   );

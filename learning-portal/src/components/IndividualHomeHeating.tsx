@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Home, Wind, Droplets, Waves, ArrowDownUp, ThermometerSun } from 'lucide-react';
 import { HeatPumpDiagram } from './illustrations/HeatPumpDiagram';
-import { RelatedResources } from './RelatedResources';
 
 export function IndividualHomeHeating() {
   const [hoveredPump, setHoveredPump] = useState<string | null>(null);
@@ -309,11 +308,6 @@ export function IndividualHomeHeating() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['1.2']}
-          title="Resources For Section 1.2"
-          description="Reference cards here stay focused on heat pumps and home-scale heating and cooling systems."
-        />
       </div>
     </section>
   );

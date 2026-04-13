@@ -23,9 +23,10 @@ interface TableOfContentsProps {
   setCurrentChapter: (chapter: ChapterId) => void;
   activeSection: string;
   visibleSections: Section[];
-  currentView: 'portal' | 'resources';
+  currentView: 'portal' | 'resources' | 'glossary';
   onNavigatePortal: () => void;
   onNavigateResources: () => void;
+  onNavigateGlossary: () => void;
 }
 
 export function TableOfContents({
@@ -36,7 +37,8 @@ export function TableOfContents({
   visibleSections,
   currentView,
   onNavigatePortal,
-  onNavigateResources
+  onNavigateResources,
+  onNavigateGlossary
 }: TableOfContentsProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -94,7 +96,7 @@ export function TableOfContents({
   };
 
   const navButtonClass = (isActive: boolean) =>
-    currentView === 'resources'
+    currentView !== 'portal'
       ? `rounded-full px-5 py-3 text-sm font-semibold transition-all ${
           isActive
             ? 'shadow-sm'
@@ -119,12 +121,16 @@ export function TableOfContents({
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700">
-                {currentView === 'resources' ? 'Research Library' : 'Learning Portal'}
+                {currentView === 'portal' ? 'Learning Portal' : currentView === 'resources' ? 'Research Library' : 'Reference Guide'}
               </p>
               <h2 className="text-lg font-bold text-slate-950 sm:text-xl">
                 {currentView === 'resources' ? (
                   <>
                     Resource Library <span className="text-slate-500">/ Browse all portal materials</span>
+                  </>
+                ) : currentView === 'glossary' ? (
+                  <>
+                    Glossary <span className="text-slate-500">/ Key geothermal terms</span>
                   </>
                 ) : (
                   <>
@@ -169,6 +175,15 @@ export function TableOfContents({
                     className={navButtonClass(false)}
                   >
                     Resources
+                  </motion.button>
+
+                  <motion.button
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={onNavigateGlossary}
+                    className={navButtonClass(false)}
+                  >
+                    Glossary
                   </motion.button>
                 </>
               ) : (
@@ -217,24 +232,35 @@ export function TableOfContents({
                     })
                   : null}
 
+                {currentView === 'portal' ? (
+                  <button
+                    type="button"
+                    onClick={onNavigateGlossary}
+                    className="rounded-2xl border border-slate-400/70 bg-slate-900 px-4 py-3 text-left text-slate-100 shadow-sm transition"
+                  >
+                    <div className="font-semibold">Glossary</div>
+                    <div className="text-sm text-slate-300">Browse key geothermal terms</div>
+                  </button>
+                ) : null}
+
                 <button
                   type="button"
                   onClick={() => {
-                    if (currentView === 'resources') {
+                    if (currentView !== 'portal') {
                       onNavigatePortal();
                     } else {
                       onNavigateResources();
                     }
                   }}
                   className={`rounded-2xl px-4 py-3 text-left transition ${
-                    currentView === 'resources'
+                    currentView !== 'portal'
                       ? 'border border-emerald-900 bg-emerald-900 text-white shadow-sm'
                       : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm'
                   }`}
                 >
-                  <div className="font-semibold">{currentView === 'resources' ? 'Back To Portal' : 'Resources'}</div>
-                  <div className={`text-sm ${currentView === 'resources' ? 'text-white/80' : 'text-slate-300'}`}>
-                    {currentView === 'resources' ? 'Return to chapter view' : 'Browse all resource cards'}
+                  <div className="font-semibold">{currentView !== 'portal' ? 'Back To Portal' : 'Resources'}</div>
+                  <div className={`text-sm ${currentView !== 'portal' ? 'text-white/80' : 'text-slate-300'}`}>
+                    {currentView !== 'portal' ? 'Return to chapter view' : 'Browse all resource cards'}
                   </div>
                 </button>
               </div>
@@ -264,7 +290,9 @@ export function TableOfContents({
             </div>
           ) : (
             <div className="mt-4 border-t border-slate-200 pt-4 text-sm text-slate-600">
-              Browse the full research library by chapter or keyword.
+              {currentView === 'resources'
+                ? 'Browse the full research library by chapter or keyword.'
+                : 'Browse glossary terms and definitions from the shared Airtable glossary.'}
             </div>
           )}
         </div>

@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Home, Users, Flag, Globe } from 'lucide-react';
-import { RelatedResources } from './RelatedResources';
 
 export function Benefits() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
@@ -189,12 +188,6 @@ export function Benefits() {
             );
           })}
         </div>
-
-        <RelatedResources
-          sections={['1.5']}
-          title="Resources For Section 1.5"
-          description="These resources extend the benefits story with reports, explainers, presentations, and short videos."
-        />
 
       </div>
     </section>

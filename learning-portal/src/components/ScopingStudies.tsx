@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { FileText, MapPin, DollarSign, TrendingUp, Layers, Zap } from 'lucide-react';
 import { ScopingStudyProcessDiagram } from './illustrations/ScopingStudyProcessDiagram';
-import { RelatedResources } from './RelatedResources';
 
 export function ScopingStudies() {
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
@@ -228,11 +227,6 @@ export function ScopingStudies() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['3.2']}
-          title="Resources For Section 3.2"
-          description="These cards connect the portal overview to example scoping studies and technical reference tools."
-        />
       </div>
     </section>
   );

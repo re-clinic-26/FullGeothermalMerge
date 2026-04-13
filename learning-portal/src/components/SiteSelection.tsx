@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { MapPin, CheckCircle, Building2, Home, Factory, School, Users } from 'lucide-react';
 import { SiteSelectionDiagram } from './illustrations/SiteSelectionDiagram';
-import { RelatedResources } from './RelatedResources';
 
 export function SiteSelection() {
   const [selectedFeature, setSelectedFeature] = useState<number | null>(null);
@@ -256,11 +255,6 @@ export function SiteSelection() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['3.1']}
-          title="Resources For Section 3.1"
-          description="These references deepen the first-pass screening work by adding site-selection guides, checklists, and geological context."
-        />
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Thermometer, ArrowRight, Droplets, Wind, Snowflake } from 'lucide-react';
-import { RelatedResources } from './RelatedResources';
 
 export function Introduction() {
   const [hoveredConcept, setHoveredConcept] = useState<string | null>(null);
@@ -165,11 +164,6 @@ export function Introduction() {
           </div>
         </motion.div>
 
-        <RelatedResources
-          sections={['1.1']}
-          title="Resources For Section 1.1"
-          description="These source materials reinforce the portal’s introduction to thermal energy and geothermal fundamentals."
-        />
       </div>
     </section>
   );

@@ -16,12 +16,13 @@ import { CommunityEngagement } from './components/CommunityEngagement';
 import { HomeownerFAQs } from './components/HomeownerFAQs';
 import { InteractiveMap } from './components/InteractiveMap';
 import { QuizSection } from './components/QuizSection';
+import { GlossaryPage } from './components/GlossaryPage';
 import { ResourcesPage } from './components/ResourcesPage';
 import { TableOfContents } from './components/TableOfContents';
 import { chapter3Quiz } from './data/quizzes';
 
 type ChapterId = 'chapter-1' | 'chapter-2' | 'chapter-3';
-type AppView = 'portal' | 'resources';
+type AppView = 'portal' | 'resources' | 'glossary';
 
 interface Section {
   id: string;
@@ -121,9 +122,14 @@ function ChapterContent({ currentChapter }: { currentChapter: ChapterId }) {
 }
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<AppView>(() =>
-    window.location.pathname.replace(/\/+$/, '').endsWith('/resources') ? 'resources' : 'portal'
-  );
+  const getViewFromPath = (): AppView => {
+    const normalizedPath = window.location.pathname.replace(/\/+$/, '');
+    if (normalizedPath.endsWith('/resources')) return 'resources';
+    if (normalizedPath.endsWith('/glossary')) return 'glossary';
+    return 'portal';
+  };
+
+  const [currentView, setCurrentView] = useState<AppView>(() => getViewFromPath());
   const [currentChapter, setCurrentChapter] = useState<ChapterId>('chapter-1');
   const visibleSections = useMemo(
     () => chapters.find((chapter) => chapter.id === currentChapter)?.sections ?? [],
@@ -137,7 +143,7 @@ export default function App() {
 
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentView(window.location.pathname.replace(/\/+$/, '').endsWith('/resources') ? 'resources' : 'portal');
+      setCurrentView(getViewFromPath());
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -188,7 +194,9 @@ export default function App() {
 
   const buildPath = (view: AppView) => {
     const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
-    return view === 'resources' ? `${base}/resources` || '/resources' : `${base}/` || '/';
+    if (view === 'resources') return `${base}/resources` || '/resources';
+    if (view === 'glossary') return `${base}/glossary` || '/glossary';
+    return `${base}/` || '/';
   };
 
   const navigateToView = (view: AppView) => {
@@ -212,6 +220,7 @@ export default function App() {
             currentView={currentView}
             onNavigatePortal={() => navigateToView('portal')}
             onNavigateResources={() => navigateToView('resources')}
+            onNavigateGlossary={() => navigateToView('glossary')}
           />
           <div className="relative">
             <ChapterContent currentChapter={currentChapter} />
@@ -228,8 +237,9 @@ export default function App() {
             currentView={currentView}
             onNavigatePortal={() => navigateToView('portal')}
             onNavigateResources={() => navigateToView('resources')}
+            onNavigateGlossary={() => navigateToView('glossary')}
           />
-          <ResourcesPage />
+          {currentView === 'resources' ? <ResourcesPage /> : <GlossaryPage />}
         </>
       )}
     </div>

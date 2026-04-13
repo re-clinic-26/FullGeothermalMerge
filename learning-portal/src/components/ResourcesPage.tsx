@@ -73,28 +73,38 @@ export function ResourcesPage() {
           </div>
 
           <div className="mx-auto mt-6 max-w-xl">
-            <div className="relative">
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <div
+              className="rounded-full bg-white shadow-sm"
+              style={{
+                alignItems: 'center',
+                border: '1px solid #cbd5e1',
+                display: 'flex',
+                gap: '0.85rem',
+                minHeight: '2.875rem',
+                paddingLeft: '1.35rem',
+                paddingRight: '1rem',
+              }}
+            >
+              <Search className="h-4 w-4 shrink-0 text-slate-400" />
               <input
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search by title, topic, or section"
-                className="w-full rounded-full bg-white py-3 pl-11 pr-4 text-sm shadow-sm outline-none transition"
+                className="w-full bg-transparent py-3 text-sm outline-none"
                 style={{
-                  border: '1px solid #cbd5e1',
                   color: '#334155',
                 }}
               />
             </div>
           </div>
 
-          <div className="mt-8 text-center text-sm text-slate-500">
+          <div className="mt-9 text-center text-sm text-slate-500">
             Showing {filteredResources.length} of {resourceCards.length} resources
           </div>
 
           {filteredResources.length > 0 ? (
-            <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mx-auto mt-12 grid max-w-6xl gap-8 md:grid-cols-2 xl:grid-cols-3">
               {filteredResources.map((resource) => (
                 <ResourceCardTile key={resource.id} resource={resource} tone="light" variant="library" />
               ))}

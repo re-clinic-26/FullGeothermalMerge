@@ -4,7 +4,6 @@ import { DollarSign, Building2, Users, Landmark, TrendingDown, FileText } from '
 import { chapter1Quiz } from '../data/quizzes';
 import { QuizSection } from './QuizSection';
 import { FundingMixChart } from './illustrations/FundingMixChart';
-import { RelatedResources } from './RelatedResources';
 
 export function Costs() {
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
@@ -323,12 +322,6 @@ export function Costs() {
             </div>
           </div>
         </motion.div>
-
-        <RelatedResources
-          sections={['1.6']}
-          title="Resources For Section 1.6"
-          description="Use these source documents to dig into financing structures, investment models, and funding opportunities."
-        />
 
         <div className="mt-16">
           <QuizSection

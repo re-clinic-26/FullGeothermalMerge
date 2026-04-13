@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Zap, ArrowDown, Droplet, Mountain } from 'lucide-react';
-import { RelatedResources } from './RelatedResources';
 
 export function ElectricityGeneration() {
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
@@ -221,12 +220,6 @@ export function ElectricityGeneration() {
           </motion.div>
         </div>
 
-        <RelatedResources
-          sections={['1.4']}
-          tone="dark"
-          title="Resources For Section 1.4"
-          description="These supporting videos stay within the darker visual treatment of the electricity-generation section while linking out to deeper context."
-        />
       </div>
     </section>
   );
