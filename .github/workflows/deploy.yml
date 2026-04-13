@@ -30,6 +30,8 @@ jobs:
           cache-dependency-path: learning-portal/package-lock.json
       - run: npm ci
       - run: npm run build
+        env:
+          BASE_PATH: /FullGeothermalMerge/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: learning-portal/build
