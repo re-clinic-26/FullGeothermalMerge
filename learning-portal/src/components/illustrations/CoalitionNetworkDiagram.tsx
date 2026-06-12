@@ -18,7 +18,7 @@ export function CoalitionNetworkDiagram() {
       </p>
 
       <div className="mt-6 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-4 ring-1 ring-slate-200/70">
-        <svg viewBox="0 0 300 210" className="h-60 w-full" preserveAspectRatio="none">
+        <svg viewBox="0 0 300 210" className="aspect-[300/210] w-full">
           {nodes.map((node, index) => (
             <motion.line
               key={`line-${node.label}`}

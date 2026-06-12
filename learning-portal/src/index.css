@@ -146,7 +146,6 @@
     --radius-xs: 0.125rem;
     --radius-2xl: 1rem;
     --radius-3xl: 1.5rem;
-    --drop-shadow-lg: 0 4px 4px rgb(0 0 0 / 0.15);
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -660,6 +659,15 @@
   }
   .field-sizing-content {
     field-sizing: content;
+  }
+  .aspect-\[300\/210\] {
+    aspect-ratio: 300/210;
+  }
+  .aspect-\[400\/220\] {
+    aspect-ratio: 400/220;
+  }
+  .aspect-\[400\/240\] {
+    aspect-ratio: 400/240;
   }
   .aspect-square {
     aspect-ratio: 1 / 1;

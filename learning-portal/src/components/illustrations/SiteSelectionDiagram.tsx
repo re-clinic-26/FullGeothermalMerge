@@ -17,7 +17,7 @@ export function SiteSelectionDiagram() {
       </p>
 
       <div className="mt-6 overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 to-emerald-50 p-4 ring-1 ring-slate-200/70">
-        <svg viewBox="0 0 400 220" className="h-56 w-full" preserveAspectRatio="none">
+        <svg viewBox="0 0 400 220" className="aspect-[400/220] w-full">
           <motion.g
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
