@@ -3,14 +3,14 @@ const glossaryEmbedUrl = 'https://airtable.com/embed/appdMggAnww76txbq/shrjAMIUy
 
 export function GlossaryPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       <section className="px-3 pb-3 pt-3">
         <div className="overflow-hidden border border-slate-200 bg-white shadow-[0_18px_60px_-46px_rgba(15,23,42,0.45)]">
           <iframe
             title="Geothermal glossary Airtable"
             src={glossaryEmbedUrl}
             className="block w-full bg-white"
-            style={{ height: 'calc(100vh - 185px)', minHeight: '780px' }}
+            style={{ minHeight: '780px' }}
           />
         </div>
         <div className="mt-2 text-right text-xs text-slate-500">

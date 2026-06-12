@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ChapterId = 'chapter-1' | 'chapter-2' | 'chapter-3';
 
@@ -41,43 +41,11 @@ export function TableOfContents({
   onNavigateGlossary
 }: TableOfContentsProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
-  const [navHeight, setNavHeight] = useState(0);
   const activeChapter = chapters.find((chapter) => chapter.id === currentChapter);
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const navRef = useRef<HTMLElement | null>(null);
-  const pinTriggerRef = useRef(0);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [currentChapter, currentView]);
-
-  useEffect(() => {
-    const updateMeasurements = () => {
-      if (wrapperRef.current) {
-        pinTriggerRef.current = wrapperRef.current.getBoundingClientRect().top + window.scrollY;
-      }
-
-      if (navRef.current) {
-        setNavHeight(navRef.current.offsetHeight);
-      }
-    };
-
-    const handleScroll = () => {
-      setIsPinned(window.scrollY >= pinTriggerRef.current);
-    };
-
-    updateMeasurements();
-    handleScroll();
-
-    window.addEventListener('resize', updateMeasurements);
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('resize', updateMeasurements);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [currentChapter, isMobileMenuOpen, visibleSections.length]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -109,15 +77,11 @@ export function TableOfContents({
         }`;
 
   return (
-    <div ref={wrapperRef} style={isPinned ? { height: navHeight } : undefined}>
-      <section
-        id="chapter-nav"
-        ref={navRef}
-        className={`w-full border-b border-slate-200 bg-white/95 shadow-md backdrop-blur ${
-          isPinned ? 'fixed inset-x-0 top-0 z-50' : 'relative z-40'
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+    <section
+      id="chapter-nav"
+      className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 shadow-md backdrop-blur"
+    >
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700">
@@ -297,6 +261,5 @@ export function TableOfContents({
           )}
         </div>
       </section>
-    </div>
   );
 }

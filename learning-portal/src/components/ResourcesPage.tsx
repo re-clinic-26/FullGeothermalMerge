@@ -30,7 +30,7 @@ export function ResourcesPage() {
   }, [query, selectedChapter]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50 to-blue-50/70">
+    <div className="bg-gradient-to-br from-white via-slate-50 to-blue-50/70">
       <section className="px-6 pb-16 pt-12 sm:pt-16">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-4xl text-center">
