@@ -36,7 +36,7 @@ export function ThermalNetworkDiagram() {
       <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white">
         <div className="absolute bottom-0 left-0 right-0 h-8 border-t border-emerald-200 bg-emerald-100/70" />
 
-        <svg className="h-72 w-full" viewBox="0 0 400 200">
+        <svg className="h-72 w-full" viewBox="0 0 400 200" preserveAspectRatio="none">
           {pipes.map((path, index) => (
             <g key={path}>
               <motion.path
@@ -83,7 +83,7 @@ export function ThermalNetworkDiagram() {
           <motion.div
             key={building.id}
             className="absolute"
-            style={{ left: building.x, top: building.y }}
+            style={{ left: `${(building.x / 400) * 100}%`, top: `${(building.y / 200) * 100}%` }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
