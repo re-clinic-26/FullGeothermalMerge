@@ -24,14 +24,14 @@ const navLinks = [
 export function SiteHeader() {
   return (
     <header className="w-full border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
-        <div className="flex items-center gap-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6 sm:px-6 sm:py-8">
+        <div className="flex items-center gap-3">
           <a href={WIX_SITE_URL}>
-            <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-9 w-auto sm:h-12" />
+            <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-5 w-auto sm:h-6" />
           </a>
-          <div className="h-9 w-px bg-slate-300 sm:h-12" />
+          <div className="h-5 w-px bg-slate-300 sm:h-6" />
           <a href={DUSP_URL}>
-            <img src={duspLogo} alt="DUSP" className="h-9 w-auto sm:h-12" />
+            <img src={duspLogo} alt="DUSP" className="h-5 w-auto sm:h-6" />
           </a>
         </div>
 
