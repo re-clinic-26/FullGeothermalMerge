@@ -10,7 +10,7 @@ export function HeatPumpDiagram({ mode = 'heating' }: HeatPumpDiagramProps) {
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-emerald-50 p-4 shadow-lg md:p-6">
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-emerald-700/90 to-emerald-500/60" />
+      <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-emerald-700/90 to-emerald-500/60 md:h-64" />
 
       <div className="relative h-80 md:h-96">
         <motion.div

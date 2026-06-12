@@ -787,12 +787,6 @@
   .h-48 {
     height: calc(var(--spacing) * 48);
   }
-  .h-56 {
-    height: calc(var(--spacing) * 56);
-  }
-  .h-60 {
-    height: calc(var(--spacing) * 60);
-  }
   .h-64 {
     height: calc(var(--spacing) * 64);
   }
@@ -852,9 +846,6 @@
   }
   .min-h-16 {
     min-height: calc(var(--spacing) * 16);
-  }
-  .min-h-\[72vh\] {
-    min-height: 72vh;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -4706,6 +4697,11 @@
   .md\:hidden {
     @media (width >= 48rem) {
       display: none;
+    }
+  }
+  .md\:h-64 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 64);
     }
   }
   .md\:h-96 {
