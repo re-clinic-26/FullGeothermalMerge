@@ -24,14 +24,14 @@ const navLinks = [
 export function SiteHeader() {
   return (
     <header className="w-full border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
         <div className="flex items-center gap-4">
-          <a href={WIX_SITE_URL} target="_blank" rel="noreferrer">
-            <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-8 w-auto sm:h-10" />
+          <a href={WIX_SITE_URL}>
+            <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-9 w-auto sm:h-12" />
           </a>
-          <div className="h-8 w-px bg-slate-300 sm:h-10" />
-          <a href={DUSP_URL} target="_blank" rel="noreferrer">
-            <img src={duspLogo} alt="DUSP" className="h-8 w-auto sm:h-10" />
+          <div className="h-9 w-px bg-slate-300 sm:h-12" />
+          <a href={DUSP_URL}>
+            <img src={duspLogo} alt="DUSP" className="h-9 w-auto sm:h-12" />
           </a>
         </div>
 
@@ -40,22 +40,18 @@ export function SiteHeader() {
             <div key={link.label} className="group relative">
               <a
                 href={link.href}
-                target="_blank"
-                rel="noreferrer"
                 className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-700"
               >
                 {link.label}
               </a>
 
               {link.dropdown ? (
-                <div className="invisible absolute left-0 top-full z-50 whitespace-nowrap bg-slate-100 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div className="invisible absolute right-0 top-full z-50 whitespace-nowrap bg-slate-100 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   {link.dropdown.map((item) => (
                     <a
                       key={item.label}
                       href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block px-4 py-3 text-base text-slate-800 hover:bg-slate-200"
+                      className="block px-6 py-3 text-base text-slate-800 hover:bg-slate-200"
                     >
                       {item.label}
                     </a>
@@ -66,8 +62,6 @@ export function SiteHeader() {
           ))}
           <a
             href={WIX_SITE_URL}
-            target="_blank"
-            rel="noreferrer"
             aria-label="Search"
             className="text-slate-700 transition-colors hover:text-blue-700"
           >
