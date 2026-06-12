@@ -15,7 +15,7 @@ export function BuildingConnectionDiagram() {
       </p>
 
       <div className="mt-6 overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50 p-4 ring-1 ring-slate-200/70">
-        <svg viewBox="0 0 400 240" className="h-56 w-full">
+        <svg viewBox="0 0 400 240" className="h-56 w-full" preserveAspectRatio="none">
           <motion.rect
             x="0"
             y="190"
