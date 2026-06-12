@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
 import mitLogo from '../assets/mit-logo.png';
 import duspLogo from '../assets/dusp-logo.png';
 
@@ -7,8 +7,16 @@ const DUSP_URL = 'https://dusp.mit.edu';
 
 const navLinks = [
   { label: 'Home', href: WIX_SITE_URL },
-  { label: 'Research', href: `${WIX_SITE_URL}/research` },
-  { label: 'About', href: `${WIX_SITE_URL}/about` },
+  {
+    label: 'Research',
+    href: `${WIX_SITE_URL}/services-4`,
+    dropdown: [{ label: 'Geothermal Energy Networks', href: `${WIX_SITE_URL}/geothermal-energy-networks` }],
+  },
+  {
+    label: 'About',
+    href: `${WIX_SITE_URL}/about`,
+    dropdown: [{ label: 'Education', href: `${WIX_SITE_URL}/general-8` }],
+  },
   { label: 'Blogs', href: `${WIX_SITE_URL}/blog` },
   { label: 'Publications', href: `${WIX_SITE_URL}/projects` },
 ];
@@ -29,15 +37,33 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-700"
-            >
-              {link.label}
-            </a>
+            <div key={link.label} className="group relative">
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 text-sm font-medium text-slate-700 transition-colors hover:text-blue-700"
+              >
+                {link.label}
+                {link.dropdown ? <ChevronDown className="h-3.5 w-3.5" /> : null}
+              </a>
+
+              {link.dropdown ? (
+                <div className="invisible absolute left-0 top-full z-50 min-w-[200px] rounded-md border border-slate-200 bg-white py-1 opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  {link.dropdown.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block whitespace-nowrap px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-700"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </div>
           ))}
           <a
             href={WIX_SITE_URL}
