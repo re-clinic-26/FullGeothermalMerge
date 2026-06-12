@@ -24,7 +24,7 @@ const navLinks = [
 export function SiteHeader() {
   return (
     <header className="w-full border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6 sm:px-6 sm:py-8">
+      <div className="flex w-full items-center justify-between gap-4 px-4 py-6 sm:px-6 sm:py-8">
         <div className="flex items-center gap-3">
           <a href={WIX_SITE_URL}>
             <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-5 w-auto sm:h-6" />
