@@ -1,4 +1,4 @@
-import { ChevronDown, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import mitLogo from '../assets/mit-logo.png';
 import duspLogo from '../assets/dusp-logo.png';
 
@@ -42,21 +42,20 @@ export function SiteHeader() {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1 text-sm font-medium text-slate-700 transition-colors hover:text-blue-700"
+                className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-700"
               >
                 {link.label}
-                {link.dropdown ? <ChevronDown className="h-3.5 w-3.5" /> : null}
               </a>
 
               {link.dropdown ? (
-                <div className="invisible absolute left-0 top-full z-50 min-w-[200px] rounded-md border border-slate-200 bg-white py-1 opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div className="invisible absolute left-0 top-full z-50 whitespace-nowrap bg-slate-100 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   {link.dropdown.map((item) => (
                     <a
                       key={item.label}
                       href={item.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="block whitespace-nowrap px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-700"
+                      className="block px-4 py-3 text-base text-slate-800 hover:bg-slate-200"
                     >
                       {item.label}
                     </a>

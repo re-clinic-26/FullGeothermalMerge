@@ -183,7 +183,7 @@ export function TableOfContents({
                           onClick={() => setCurrentChapter(chapter.id)}
                           className={`rounded-2xl px-4 py-3 text-left transition ${
                             isActive
-                              ? 'border border-cyan-300/80 bg-gradient-to-r from-cyan-200 to-blue-200 text-slate-950 shadow-md shadow-cyan-200/60'
+                              ? 'border border-cyan-300/80 bg-cyan-200 text-slate-950 shadow-md shadow-cyan-200/60'
                               : 'border border-slate-400/70 bg-slate-900 text-slate-100 shadow-sm'
                           }`}
                         >
