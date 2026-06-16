@@ -2281,6 +2281,9 @@
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
+  }
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
   }
@@ -4610,9 +4613,9 @@
       height: calc(var(--spacing) * 6);
     }
   }
-  .sm\:h-12 {
+  .sm\:h-8 {
     @media (width >= 40rem) {
-      height: calc(var(--spacing) * 12);
+      height: calc(var(--spacing) * 8);
     }
   }
   .sm\:h-\[460px\] {
@@ -4663,6 +4666,11 @@
   .sm\:py-8 {
     @media (width >= 40rem) {
       padding-block: calc(var(--spacing) * 8);
+    }
+  }
+  .sm\:py-10 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--spacing) * 10);
     }
   }
   .sm\:pt-16 {

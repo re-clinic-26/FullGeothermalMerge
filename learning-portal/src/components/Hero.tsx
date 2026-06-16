@@ -3,7 +3,7 @@ import { Flame, ArrowDown } from 'lucide-react';
 
 export function Hero() {
   return (
-    <section className="relative flex items-center justify-center overflow-hidden">
+    <section className="relative flex items-center justify-center overflow-hidden py-12">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
