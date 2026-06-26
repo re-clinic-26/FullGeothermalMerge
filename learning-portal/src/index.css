@@ -1243,6 +1243,9 @@
       margin-block-end: calc(calc(var(--spacing) * 12) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+  .gap-x-6 {
+    column-gap: calc(var(--spacing) * 6);
+  }
   .space-x-1 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -1252,6 +1255,9 @@
   }
   .gap-y-0\.5 {
     row-gap: calc(var(--spacing) * 0.5);
+  }
+  .gap-y-2 {
+    row-gap: calc(var(--spacing) * 2);
   }
   .self-start {
     align-self: flex-start;
@@ -3479,6 +3485,13 @@
       }
     }
   }
+  .hover\:bg-cyan-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-cyan-100);
+      }
+    }
+  }
   .hover\:bg-destructive\/90 {
     &:hover {
       @media (hover: hover) {
@@ -4608,11 +4621,6 @@
       display: flex;
     }
   }
-  .sm\:h-6 {
-    @media (width >= 40rem) {
-      height: calc(var(--spacing) * 6);
-    }
-  }
   .sm\:h-8 {
     @media (width >= 40rem) {
       height: calc(var(--spacing) * 8);
@@ -4661,11 +4669,6 @@
   .sm\:px-6 {
     @media (width >= 40rem) {
       padding-inline: calc(var(--spacing) * 6);
-    }
-  }
-  .sm\:py-8 {
-    @media (width >= 40rem) {
-      padding-block: calc(var(--spacing) * 8);
     }
   }
   .sm\:py-10 {

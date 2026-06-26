@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { SiteHeader } from './components/SiteHeader';
+import { SiteFooter } from './components/SiteFooter';
 import { Hero } from './components/Hero';
 import { Introduction } from './components/Introduction';
 import { IndividualHomeHeating } from './components/IndividualHomeHeating';
@@ -244,6 +245,7 @@ export default function App() {
           {currentView === 'resources' ? <ResourcesPage /> : <GlossaryPage />}
         </>
       )}
+      <SiteFooter />
     </div>
   );
 }

@@ -84,9 +84,12 @@ export function TableOfContents({
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700">
-                {currentView === 'portal' ? 'Learning Portal' : currentView === 'resources' ? 'Research Library' : 'Reference Guide'}
-              </p>
+              <a
+                href="https://renewable-energy.mit.edu"
+                className="inline-block rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 hover:bg-cyan-100"
+              >
+                GEN Homepage
+              </a>
               <h2 className="text-lg font-bold text-slate-950 sm:text-xl">
                 {currentView === 'resources' ? (
                   <>
