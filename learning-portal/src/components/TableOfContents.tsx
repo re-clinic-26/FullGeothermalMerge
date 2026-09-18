@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { scrollToTarget } from '../lib/embedScroll';
 
 type ChapterId = 'chapter-1' | 'chapter-2' | 'chapter-3';
 
@@ -22,6 +23,7 @@ interface TableOfContentsProps {
   currentChapter: ChapterId;
   setCurrentChapter: (chapter: ChapterId) => void;
   activeSection: string;
+  setActiveSection: (id: string) => void;
   visibleSections: Section[];
   currentView: 'portal' | 'resources' | 'glossary';
   onNavigatePortal: () => void;
@@ -34,6 +36,7 @@ export function TableOfContents({
   currentChapter,
   setCurrentChapter,
   activeSection,
+  setActiveSection,
   visibleSections,
   currentView,
   onNavigatePortal,
@@ -53,14 +56,9 @@ export function TableOfContents({
       return;
     }
 
-    const offset = 120;
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
+    // Embedded in a host page the scroll spy never fires, so light the button up here.
+    setActiveSection(id);
+    scrollToTarget(element, 120);
   };
 
   const navButtonClass = (isActive: boolean) =>

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { reportHeightToHost, scrollToTarget, scrollToTop } from './lib/embedScroll';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { Hero } from './components/Hero';
@@ -152,6 +153,8 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  useEffect(() => reportHeightToHost(), []);
+
   useEffect(() => {
     if (currentView !== 'portal') {
       return;
@@ -190,8 +193,7 @@ export default function App() {
       return;
     }
 
-    const top = chapterNav.getBoundingClientRect().top + window.pageYOffset - 24;
-    window.scrollTo({ top, behavior: 'smooth' });
+    scrollToTarget(chapterNav, 24);
   }, [currentChapter, currentView]);
 
   const buildPath = (view: AppView) => {
@@ -205,7 +207,7 @@ export default function App() {
     const nextPath = buildPath(view);
     window.history.pushState({}, '', nextPath);
     setCurrentView(view);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
   };
 
   return (
@@ -219,6 +221,7 @@ export default function App() {
             currentChapter={currentChapter}
             setCurrentChapter={setCurrentChapter}
             activeSection={activeSection}
+            setActiveSection={setActiveSection}
             visibleSections={visibleSections}
             currentView={currentView}
             onNavigatePortal={() => navigateToView('portal')}
@@ -236,6 +239,7 @@ export default function App() {
             currentChapter={currentChapter}
             setCurrentChapter={setCurrentChapter}
             activeSection={activeSection}
+            setActiveSection={setActiveSection}
             visibleSections={visibleSections}
             currentView={currentView}
             onNavigatePortal={() => navigateToView('portal')}
