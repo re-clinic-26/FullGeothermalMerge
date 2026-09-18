@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { Hero } from './components/Hero';
 import { Introduction } from './components/Introduction';
@@ -209,6 +210,7 @@ export default function App() {
 
   return (
     <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
+      <SiteHeader />
       {currentView === 'portal' ? (
         <>
           <Hero />
