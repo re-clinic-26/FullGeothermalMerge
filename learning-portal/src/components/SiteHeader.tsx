@@ -25,7 +25,7 @@ const navLinks = [
 export function SiteHeader() {
   return (
     <header className="w-full bg-white">
-      <div className="flex w-full items-center justify-between gap-4 px-4 py-8 sm:px-6 sm:py-10">
+      <div className="flex w-full items-center justify-between gap-4 px-6 py-8 sm:py-10 lg:pl-10 lg:pr-16 xl:pr-24">
         <div className="flex items-center gap-5">
           <a href={WIX_SITE_URL}>
             <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-8 w-auto sm:h-10" />
@@ -36,7 +36,7 @@ export function SiteHeader() {
           </a>
         </div>
 
-        <nav className="hidden items-center gap-10 md:flex lg:gap-16 xl:gap-20">
+        <nav className="hidden items-center gap-8 md:flex lg:gap-12 xl:gap-[76px]">
           {navLinks.map((link) => (
             <div key={link.label} className="group relative">
               <a
@@ -69,7 +69,7 @@ export function SiteHeader() {
           <a
             href={WIX_SITE_URL}
             aria-label="Search"
-            className="text-slate-900 transition-colors hover:text-[#4a5fc4]"
+            className="text-slate-900 transition-colors hover:text-[#4a5fc4] xl:-ml-3"
           >
             <Search className="h-5 w-5" strokeWidth={2} />
           </a>
