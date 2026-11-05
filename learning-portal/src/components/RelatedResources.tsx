@@ -72,7 +72,7 @@ export function ResourceCardTile({
       <motion.a
         href={resource.url}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         whileHover={{ y: -6 }}
         className="group min-w-0 transition-all duration-300"
         style={{
@@ -159,7 +159,7 @@ export function ResourceCardTile({
     <motion.a
       href={resource.url}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       whileHover={{ y: -6, scale: 1.01 }}
       className={[
         'group overflow-hidden rounded-2xl border transition-all duration-300',

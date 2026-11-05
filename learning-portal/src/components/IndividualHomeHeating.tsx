@@ -235,7 +235,7 @@ export function IndividualHomeHeating() {
               <a
                 href="https://www.energy.gov/hgeo/geothermal/geothermal-heat-pumps"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="font-semibold text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-900"
               >
                 U.S. Department of Energy’s geothermal heat-pump overview

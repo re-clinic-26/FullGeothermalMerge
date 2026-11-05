@@ -18,6 +18,7 @@ Messages sent to the parent window:
 | --- | --- | --- |
 | `gen-portal-scroll` | `{ top, offset }` | scroll so that pixel `top` of the portal is at the top of the viewport |
 | `gen-portal-height` | `{ height }` | the portal's full rendered height in px |
+| `geo-height` | `{ height }` | `document.documentElement.scrollHeight` in px, sent by the script in `learning-portal/index.html` on load, resize, and body size changes |
 
 ## Velo code for the Wix page
 

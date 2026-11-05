@@ -97,7 +97,7 @@ export function FundingCaseStudy() {
       <a
         href="https://drive.google.com/file/d/18tNzpeYsLNEtzXVrOmgvJSCbm21CWrKK/view"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="mt-3 inline-flex text-sm font-semibold text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-900"
       >
         Source: District Energy in Cities (2015), Chapter 3, Case Study 3.1, p. 89

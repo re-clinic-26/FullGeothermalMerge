@@ -3,13 +3,14 @@ import mitLogo from '../assets/mit-logo.png';
 import duspLogo from '../assets/dusp-logo.png';
 
 const WIX_SITE_URL = 'https://renewable-energy.mit.edu';
+const WIX_HOME_URL = `${WIX_SITE_URL}/`;
 const DUSP_URL = 'https://dusp.mit.edu';
 
 const navLinks = [
-  { label: 'Home', href: WIX_SITE_URL },
+  { label: 'Home', href: WIX_HOME_URL },
   { label: 'About', href: `${WIX_SITE_URL}/about` },
   { label: 'Blogs', href: `${WIX_SITE_URL}/blog` },
-  { label: 'Publications', href: `${WIX_SITE_URL}/projects` },
+  { label: 'Publications', href: `${WIX_SITE_URL}/publications` },
   {
     label: 'Research',
     href: `${WIX_SITE_URL}/services-4`,
@@ -27,11 +28,11 @@ export function SiteHeader() {
     <header className="w-full bg-white">
       <div className="flex w-full items-center justify-between gap-4 px-6 py-8 sm:py-10 lg:pl-10 lg:pr-16 xl:pr-24">
         <div className="flex items-center gap-5">
-          <a href={WIX_SITE_URL}>
+          <a href={WIX_HOME_URL} target="_top">
             <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-8 w-auto sm:h-10" />
           </a>
           <div className="h-8 w-px bg-slate-400 sm:h-10" />
-          <a href={DUSP_URL}>
+          <a href={DUSP_URL} target="_blank" rel="noopener noreferrer">
             <img src={duspLogo} alt="DUSP" className="h-8 w-auto sm:h-10" />
           </a>
         </div>
@@ -41,6 +42,7 @@ export function SiteHeader() {
             <div key={link.label} className="group relative">
               <a
                 href={link.href}
+                target="_top"
                 className={`flex items-center gap-2 whitespace-nowrap text-[17px] transition-colors ${
                   link.highlighted
                     ? 'text-[#4a5fc4] hover:text-[#33459c]'
@@ -57,6 +59,7 @@ export function SiteHeader() {
                     <a
                       key={item.label}
                       href={item.href}
+                      target="_top"
                       className="block px-6 py-2 text-right text-[17px] text-slate-800 hover:bg-slate-200 hover:text-[#4a5fc4]"
                     >
                       {item.label}
@@ -67,7 +70,8 @@ export function SiteHeader() {
             </div>
           ))}
           <a
-            href={WIX_SITE_URL}
+            href={WIX_HOME_URL}
+            target="_top"
             aria-label="Search"
             className="text-slate-900 transition-colors hover:text-[#4a5fc4] xl:-ml-3"
           >

@@ -84,6 +84,7 @@ export function TableOfContents({
             <div>
               <a
                 href="https://renewable-energy.mit.edu/geothermal-energy-networks"
+                target="_top"
                 className="inline-block rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-700 hover:bg-cyan-100"
               >
                 GEN Homepage

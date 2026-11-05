@@ -15,7 +15,7 @@ export function GlossaryPage() {
         </div>
         <div className="mt-2 text-right text-xs text-slate-500">
           Having trouble viewing the embedded glossary?{' '}
-          <a href={glossaryUrl} target="_blank" rel="noreferrer" className="font-semibold text-emerald-800 underline">
+          <a href={glossaryUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-800 underline">
             Open it in Airtable
           </a>
           .

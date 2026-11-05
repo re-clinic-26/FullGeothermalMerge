@@ -1,7 +1,7 @@
 import mitLogo from '../assets/mit-logo.png';
 import duspLogo from '../assets/dusp-logo.png';
 
-const WIX_SITE_URL = 'https://renewable-energy.mit.edu';
+const WIX_HOME_URL = 'https://renewable-energy.mit.edu/';
 const DUSP_URL = 'https://dusp.mit.edu';
 
 export function SiteFooter() {
@@ -24,10 +24,10 @@ export function SiteFooter() {
 
         {/* Logos */}
         <div className="flex items-center gap-6">
-          <a href={WIX_SITE_URL}>
+          <a href={WIX_HOME_URL} target="_top">
             <img src={mitLogo} alt="MIT Renewable Energy Clinic" className="h-6 w-auto sm:h-8" />
           </a>
-          <a href={DUSP_URL}>
+          <a href={DUSP_URL} target="_blank" rel="noopener noreferrer">
             <img src={duspLogo} alt="DUSP" className="h-6 w-auto sm:h-8" />
           </a>
         </div>
@@ -35,6 +35,8 @@ export function SiteFooter() {
         {/* Accessibility link */}
         <a
           href="https://accessibility.mit.edu"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-sm text-blue-600 hover:underline"
         >
           https://accessibility.mit.edu
